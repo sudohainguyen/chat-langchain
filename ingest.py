@@ -2,7 +2,7 @@
 import pickle
 
 from langchain.document_loaders import ReadTheDocsLoader
-from langchain.embeddings import OpenAIEmbeddings
+from langchain.embeddings import LlamaCppEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores.faiss import FAISS
 
@@ -16,7 +16,7 @@ def ingest_docs():
         chunk_overlap=200,
     )
     documents = text_splitter.split_documents(raw_documents)
-    embeddings = OpenAIEmbeddings()
+    embeddings = LlamaCppEmbeddings(model_path="models/llama-7b.ggmlv3.q4_0.bin")
     vectorstore = FAISS.from_documents(documents, embeddings)
 
     # Save vectorstore
