@@ -46,7 +46,7 @@ def get_chain(
     )
 
     qa = ConversationalRetrievalChain(
-        vectorstore=VectorStoreRetriever(vectorstore=vectorstore),
+        retriever=VectorStoreRetriever(vectorstore=vectorstore),
         combine_docs_chain=doc_chain,
         question_generator=question_generator,
         callback_manager=manager,
